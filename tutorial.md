@@ -85,4 +85,70 @@ Next will show how to use 3rd party dependencies to do more interesting ting wit
 
 ## Dependencies
 
-TO BE CONTINUED soon :)
+JBang can fetch dependencies from any maven compatible repository. JBang allows you to put those dependencies inside the `.java` files as a comment. An example of such dependency looks like:
+
+```
+//DEPS info.picocli:picocli:4.5.0
+```
+
+This is telling JBang to fetch the picocli library version 4.5.0 - when nothing else specified it will default to fetch it from Maven central.
+
+We can use JBang to create a full example using the picocli dependendency:
+
+```bash
+jbang init -t cli hey.java
+```
+
+This will create a file named `hey.java` that <walkthrough-editor-select-regex filePath="hey.java" regex="//DEPS.*">declare a dependency on picocli</walkthrough-editor-select-regex> and <walkthrough-editor-select-regex filePath="hey.java" regex="@Parameters">uses it in code</walkthrough-editor-select-regex>.
+
+You can run it directly using `./hey.java` or use `jbang`. For example to see picocli in action pass in `--help`:
+
+```bash
+jbang hey.java --help
+```
+
+This will print out the usage instructions for the small utility you just made here
+
+Play around with the code and see what you can make.
+
+**Info**: You will notice the red squiggly lines under annotations and some dependencies. This is an unfortunate limitation of Cloud Shell Editor - it does not enable full Java support; but you can build and run Java just fine.
+
+Next, we'll show how to run a full java server side application.
+
+## A Java server application
+
+To end this tutorial we'll show how to do a full Java server application using Quarkus.
+
+First, lets use JBang to create a Quarkus rest application:
+
+```bash
+jbang init -t qrest restapp.java
+```
+
+To run it use the following line to run it in so called devmode using at the time of writing latest Quarkus release:
+
+```bash
+jbang -Dquarkus.dev -Dquarkus.version=2.1.0.CR1 restapp.java
+```
+
+This will build and run Quarkus app. 
+
+You can use the "web Preview" feature in Cloud Shell Editor to open the example on `/hello`.
+
+You can even make changes in <walkthrough-editor-open-file filePath="restapp.java">`restapp.java`</walkthrough-editor-open-file> and when you reload the "web Preview" it should pick up the changes.
+
+# Conclusion
+
+That ends this quick tutorial on using JBang with Google Cloud Shell.
+
+Hope you enjoyed it!
+
+See more about JBang at https://jbang.dev.
+
+
+
+
+
+
+
+
